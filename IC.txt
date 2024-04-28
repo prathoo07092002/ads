@@ -1,0 +1,50 @@
+1]> mysqlsh
+
+2]mysql-js> dba.deploySandboxInstance(3310)
+mysql-js> dba.deploySandboxInstance(3320)
+mysql-js> dba.deploySandboxInstance(3330)
+
+3]mysql-js> shell.connect('root@localhost:3310')
+
+4]mysql-js> cluster = dba.createCluster('devCluster')
+
+5]mysql-js> cluster.status()
+
+6]mysql-js> cluster.addInstance('root@localhost:3320')
+
+7]c
+
+8]mysql-js> cluster.addInstance('root@localhost:3330')
+
+9]mysql-js> cluster.status()
+
+10]C:\Users\prathamesh> mysqlrouter --bootstrap root@localhost:3310 -d mysql-router
+
+11]C:\> start /B mysqlrouter -c %HOMEPATH%\mysql-router\mysqlrouter.conf
+
+12]> mysqlsh root@localhost:6446
+
+13]mysql-js> cluster = dba.getCluster()
+
+14]mysql-js> cluster.status()
+
+15]mysql-js> \sql
+
+16]mysql-sql> SELECT @@port;
+
+17]mysql-js> \js
+
+18]dba.killSandboxInstance(3310)
+
+19]mysql-js> \sql
+
+20]mysql-sql> SELECT @@port;
+
+\js
+
+
+21]mysql-js> cluster.status()
+
+22]mysql-js> dba.startSandboxInstance(3310)
+
+23]mysql-js > cluster.status()
